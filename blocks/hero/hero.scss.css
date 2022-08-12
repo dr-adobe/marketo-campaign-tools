@@ -1,34 +1,25 @@
 /* block specific CSS goes here */
-main {
-  --hero-overlay-background-color: rgb(60, 60, 60, 0.6);
-}
-main .hero-container {
-  padding: 0;
-}
 main .hero-container > div {
   max-width: unset;
 }
+
+main .hero-container {
+  padding: 0;
+}
+
 main .hero {
   position: relative;
   padding: 32px;
   min-height: 300px;
 }
+
 main .hero h1 {
-  width: 30vw;
   max-width: 1200px;
-  margin-left: 1em;
+  margin-left: auto;
   margin-right: auto;
   color: white;
-  word-wrap: normal;
-  padding: 0.25em 0.5em;
 }
-@media screen and (max-width: 800px) {
-  main .hero h1 {
-    width: 80vw;
-    margin-left: 0.5em;
-    background-color: var(--hero-overlay-background-color);
-  }
-}
+
 main .hero picture {
   position: absolute;
   z-index: -1;
@@ -39,6 +30,7 @@ main .hero picture {
   object-fit: cover;
   box-sizing: border-box;
 }
+
 main .hero img {
   object-fit: cover;
   width: 100%;
