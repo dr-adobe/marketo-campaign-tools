@@ -18,9 +18,7 @@ import {
   // eslint-disable-next-line import/no-unresolved
   } from '../../scripts/scripts.js';
 
-  export async function loadFragment($block, closest){
-    const ref = $block.textContent;
-    console.log(ref);
+  export async function loadFragment(ref, closest){
     const path = new URL(ref).pathname.split('.')[0];
     const resp = await fetch(`${path}.plain.html`);
     const html = await resp.text();

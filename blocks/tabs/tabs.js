@@ -1,5 +1,6 @@
 import { loadFragment } from "../fragment/fragment";
 
+
 export default function decorate(block) {
 
     const tabs = block.querySelectorAll(':scope > div');
@@ -25,7 +26,8 @@ export default function decorate(block) {
         })
         headings.append(titleDiv);
         // TODO: Fetch and populate the content
-        loadFragment(content, tabClass);
+        loadFragment(content.getAttribute("href"), '.tab-content');
+        
     })
 }
 
