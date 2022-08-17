@@ -1,7 +1,10 @@
-import { loadFragment } from "../fragment/fragment";
+import {
+    decorateMain,
+    loadBlocks,
+  // eslint-disable-next-line import/no-unresolved
+  } from '../../scripts/scripts.js';
 
-
-export default function decorate(block) {
+export default async function decorate(block) {
 
     const tabs = block.querySelectorAll(':scope > div');
 
@@ -9,8 +12,9 @@ export default function decorate(block) {
     headings.classList.add("tab-headings");
     headings.style.setProperty('--num-tabs', tabs.length);
     block.prepend(headings);
+    let firstTab = true;
 
-    tabs.forEach(tab => {
+    for(let tab of tabs) {
         const content = tab.querySelector(":scope > div > a");
         // TODO: Create the clickable title
         const title = content.getAttribute("title");
@@ -25,10 +29,25 @@ export default function decorate(block) {
             collapseAllExcept(block, tabClass);
         })
         headings.append(titleDiv);
-        // TODO: Fetch and populate the content
-        loadFragment(content.getAttribute("href"), '.tab-content');
         
-    })
+        // Hide other tabs
+        if (!firstTab) {
+            tab.classList.add("collapsed");
+        }
+        firstTab = false;
+
+        // Fetch and load content for the tab
+        const path = new URL(content.getAttribute("href"), window.location.origin).pathname.split(".")[0];
+        const resp = await fetch(`${path}.plain.html`);
+        if (resp.ok) {
+            const fragment = document.createElement('div');
+            fragment.classList.add("fragment-wrapper");
+            fragment.innerHTML = await resp.text();
+            decorateMain(fragment);
+            await loadBlocks(fragment);
+            tab.prepend(fragment);
+        }
+    }
 }
 
 function collapseAllExcept(block, tab) {
