@@ -20,47 +20,36 @@ export default async function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
 
+  // TODO: Restructure HTML (linked image, inline nav)
+  // TODO: Create structure for mobile (hamburger)
+
   // fetch nav content
   const navPath = cfg.nav || '/nav';
   const resp = await fetch(`${navPath}.plain.html`);
   if (resp.ok) {
     const html = await resp.text();
+    const content = new DOMParser().parseFromString(html, "text/html");
 
     // decorate nav DOM
     const nav = document.createElement('nav');
-    nav.innerHTML = html;
+    
+    // Create Clickable Logo
+    const homeLink = content.querySelector("p:nth-child(2) > a");
+    const logo = content.querySelector("p > picture");
+    const img = logo.querySelector(':scope > img');
+    img.removeAttribute("width");
+    img.removeAttribute("height");
+    homeLink.innerHTML = logo.outerHTML;
+    const logoDiv = document.createElement('div');
+    logoDiv.innerHTML = homeLink.outerHTML;
+    nav.prepend(logoDiv);
+
+    // Create Menu Items
+    const menu = content.querySelector("ul");
+    menu.setAttribute("style", `--num-menu-items:${menu.querySelectorAll(':scope > li').length}`);
+    nav.append(menu);
     decorateIcons(nav);
 
-    const classes = ['brand', 'sections', 'tools'];
-    classes.forEach((e, j) => {
-      const section = nav.children[j];
-      if (section) section.classList.add(`nav-${e}`);
-    });
-
-    const navSections = [...nav.children][1];
-    if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-        navSection.addEventListener('click', () => {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          collapseAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        });
-      });
-    }
-
-    // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = '<div class="nav-hamburger-icon"></div>';
-    hamburger.addEventListener('click', () => {
-      const expanded = nav.getAttribute('aria-expanded') === 'true';
-      document.body.style.overflowY = expanded ? '' : 'hidden';
-      nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    nav.prepend(hamburger);
-    nav.setAttribute('aria-expanded', 'false');
-    decorateIcons(nav);
     block.append(nav);
   }
 }

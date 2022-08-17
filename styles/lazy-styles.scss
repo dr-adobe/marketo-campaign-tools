@@ -1,1 +1,10 @@
 /* below the fold CSS goes here */
+.disclaimer {
+    background-color: var(--highlight-background-color);
+    font-style: italic;
+    font-size: 0.8em;
+    
+    &.section {
+        padding: 0.25em 1em;
+    }
+}

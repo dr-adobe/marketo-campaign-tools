@@ -33,6 +33,8 @@ export default async function decorate(block) {
         // Hide other tabs
         if (!firstTab) {
             tab.classList.add("collapsed");
+        } else {
+            titleDiv.classList.add("active");
         }
         firstTab = false;
 
@@ -45,6 +47,7 @@ export default async function decorate(block) {
             fragment.innerHTML = await resp.text();
             decorateMain(fragment);
             await loadBlocks(fragment);
+            tab.innerHTML = '';
             tab.prepend(fragment);
         }
     }
