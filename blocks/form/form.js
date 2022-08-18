@@ -23,17 +23,20 @@ function createSelect(fd) {
   function constructPayload(form) {
     const payload = {};
     [...form.elements].forEach((fe) => {
+        console.log(fe);
       if (fe.type === 'checkbox') {
         if (fe.checked) payload[fe.id] = fe.value;
       } else if (fe.id) {
         payload[fe.id] = fe.value;
       }
     });
+    console.dir(payload);
     return payload;
   }
   
   async function submitForm(form) {
     const payload = constructPayload(form);
+    console.log(payload);
     const resp = await fetch(form.dataset.action, {
       method: 'POST',
       cache: 'no-cache',
@@ -54,11 +57,11 @@ function createSelect(fd) {
       button.addEventListener('click', async (event) => {
         const form = button.closest('form');
         if (form.checkValidity()) {
-          event.preventDefault();
           button.setAttribute('disabled', '');
+          event.preventDefault();
           await submitForm(form);
-          const redirectTo = fd.Extra;
-          window.location.href = redirectTo;
+          // TODO: Make this a nice notification
+          document.querySelector(".protected-download").classList.add("available");
         }
       });
     }
@@ -119,8 +122,9 @@ function createSelect(fd) {
   }
   
   async function createForm(formURL) {
-    const { pathname } = new URL(formURL);
-    const resp = await fetch(pathname);
+    const { pathname, search } = new URL(formURL);
+    const resp = await fetch(`${pathname}${search ? search : ''}`);
+    console.log(`${pathname}${search ? search : ''}`);
     const json = await resp.json();
     const form = document.createElement('form');
     const rules = [];
@@ -175,8 +179,12 @@ function createSelect(fd) {
   }
   
   export default async function decorate(block) {
-    const form = block.querySelector('a[href$=".json"]');
+    let form = block.querySelector('a[href*=".json"]');
+    form = form ? form.href : block.querySelector(':scope > div > div').textContent;
+    console.log(form);
+    console.log("Creating form");
     if (form) {
-      form.replaceWith(await createForm(form.href));
+        block.innerHTML = '';
+        block.prepend(await createForm(form));
     }
   }

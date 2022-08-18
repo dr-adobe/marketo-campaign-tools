@@ -8,3 +8,26 @@
         padding: 0.25em 1em;
     }
 }
+
+.section.protected-download {
+    display: none;
+    padding: 0 0;
+
+    &.available {
+        display: block;
+    }
+
+    .default-content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;;
+
+        .button-container {
+            padding: 0;
+            margin: 0;
+
+            a {
+                margin: 0;
+            }
+        }
+    }
+}
