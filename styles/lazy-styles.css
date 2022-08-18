@@ -17,11 +17,20 @@
 }
 .section.protected-download .default-content-wrapper {
   display: grid;
+  grid-template-areas: "thanks thanks" "win mac";
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.section.protected-download .default-content-wrapper > p:first-of-type {
+  grid-area: thanks;
 }
 .section.protected-download .default-content-wrapper .button-container {
   padding: 0;
   margin: 0;
+  grid-area: win;
+}
+.section.protected-download .default-content-wrapper .button-container:last-of-type {
+  grid-area: mac;
 }
 .section.protected-download .default-content-wrapper .button-container a {
   margin: 0;

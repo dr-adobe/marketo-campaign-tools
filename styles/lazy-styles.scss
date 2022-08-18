@@ -19,11 +19,23 @@
 
     .default-content-wrapper {
         display: grid;
-        grid-template-columns: 1fr 1fr;;
+        grid-template-areas: "thanks thanks" 
+                             "win mac";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+
+        & > p:first-of-type {
+            grid-area: thanks;
+        }
 
         .button-container {
             padding: 0;
             margin: 0;
+            grid-area: win;
+
+            &:last-of-type {
+                grid-area: mac;
+            }
 
             a {
                 margin: 0;
