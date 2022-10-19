@@ -1,9 +1,9 @@
 {
-  "name": "@adobe/helix-project-boilerplate",
+  "name": "marketo-campaign-tools-site",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Starter project for Adobe Helix",
+  "description": "Primary site for the announcement of the Marketo Campaign Tools",
   "scripts": {
     "test": "wtr \"./test/**/*.test.js\" --node-resolve --port=2000 --coverage",
     "test:watch": "npm test -- --watch",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adobe/helix-project-boilerplate.git"
+    "url": "git+https://github.com/dr-adobe/marketo-campaign-tools"
   },
   "author": "Adobe",
   "license": "Apache License 2.0",
   "bugs": {
-    "url": "https://github.com/adobe/helix-project-boilerplate/issues"
+    "url": "https://github.com/dr-adobe/marketo-campaign-tools/issues"
   },
-  "homepage": "https://github.com/adobe/helix-project-boilerplate#readme",
+  "homepage": "https://github.com/dr-adobe/marketo-campaign-tools",
   "devDependencies": {
     "@babel/core": "7.18.6",
     "@babel/eslint-parser": "7.18.2",

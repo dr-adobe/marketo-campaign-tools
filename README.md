@@ -1,9 +1,9 @@
 # Adobe Success Services - Marketo Toolkit
-The home for the Adobe Success Services Marketo Tookit, an applicaiton designed to help Marketo campaign managers effectively create and managed campaign names and associated URLs.
+The home for the Adobe Marketo Campaign Tools, an applicaiton designed to help Marketo campaign managers effectively create and managed campaign names and associated URLs.
 
 ## Environments
-- Preview: https://main--{repo}--{owner}.hlx.page/
-- Live: https://main--{repo}--{owner}.hlx.live/
+- Preview: [https://main--marketo-campaign-tools--dr-adobe.hlx.page/](https://main--marketo-campaign-tools--dr-adobe.hlx.page/)
+- Live: [https://main--marketo-campaign-tools--dr-adobe.hlx.live/](https://main--marketo-campaign-tools--dr-adobe.hlx.live/)
 
 ## Installation
 

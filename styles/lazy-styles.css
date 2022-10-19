@@ -21,7 +21,7 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
-.section.protected-download .default-content-wrapper > p:first-of-type {
+.section.protected-download .default-content-wrapper > h2 {
   grid-area: thanks;
 }
 .section.protected-download .default-content-wrapper .button-container {
